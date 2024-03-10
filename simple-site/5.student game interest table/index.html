@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student game Table</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <form action="" target="_blank" id="" name="" method="get">
+
+        <label for="firstname" class="upperlabel">First name</label>
+        <input type="text" class="upperinput" id="firstname" name="firstname" maxlength="15">
+
+        <label for="lastname" class="upperlabel">Last name</label>
+        <input type="text" class="upperinput" id="lastname" name="lastname" maxlength="15">
+
+        <label for="birthdate" class="upperlabel">DOB</label>
+        <input type="date" class="upperinput" id="birthdate" name="birthdate">
+
+        <fieldset>
+            <legend>Games</legend>
+            <div>
+                <input type="checkbox" id="game1" name="game1" value="Cricket" checked>
+                <label for="game1" class="fieldslabel">Cricket</label>
+            </div>
+            <div>
+                <input type="checkbox" id="game2" class="fieldsinput" name="game2" value="Football">
+                <label for="game2" class="fieldslabel">Football</label>
+            </div>
+            <div>
+                <input type="checkbox" id="game3" class="fieldsinput" name="game3" value="Badminton">
+                <label for="game3" class="fieldslabel">Badminton</label>
+            </div>
+            <div>
+                <input type="checkbox" id="game4" class="fieldsinput" name="game4" value="Carrom">
+                <label for="game4" class="fieldslabel">Carrom</label>
+            </div>
+            <div>
+                <input type="checkbox" id="game5" class="fieldsinput" name="game5" value="Chess">
+                <label for="game5" class="fieldslabel">Chess</label>
+            </div>
+            <div>
+                <input type="checkbox" id="game6" class="fieldsinput" name="game6" value="Vollyball">
+                <label for="game6" class="fieldslabel">Vollyball</label>
+            </div>
+        </fieldset>
+
+        <input type="submit">
+
+    </form>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of birth</th>
+                <th>Games</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+
+            $('input[type="submit"]').click(function (e) {
+                e.preventDefault();
+
+                // get input values
+                let userFirstName = $('#firstname').val();
+                let userLastName = $('#lastname').val();
+                let userDob = $('#birthdate').val();
+                let isCricketCheck = $('#game1').is(":checked");
+                let isFootballCheck = $('#game2').is(":checked");
+                let isBadmintonCheck = $('#game3').is(":checked");
+                let isCarromCheck = $('#game4').is(":checked");
+                let isChessCheck = $('#game5').is(":checked");
+                let isVollyballCheck = $('#game6').is(":checked");
+
+
+                //enter and valid firstname
+                if (userFirstName === '') {
+                    alert('please enter First name');
+                    return
+                } else if (!isValidName(userFirstName)) {
+                    alert('please enter valid First name')
+                    return
+                }
+
+                //enter and valid lastname
+                if (userLastName === '') {
+                    alert('please enter Last name');
+                    return
+                } else if (!isValidName(userLastName)) {
+                    alert('please enter valid Last name')
+                    return
+                }
+
+                //enter Date
+                if (userDob === '') {
+                    alert('please enter Date of birth');
+                    return
+                }
+
+                //checked games Array 
+                let selectedGames = $.makeArray([]);
+
+                function isCheckedGame(cricket, football, badminton, carrom, chess, vollyball) {
+                    if (cricket) {
+                        selectedGames.push($('#game1').val())
+                    }
+                    if (football) {
+                        selectedGames.push($('#game2').val())
+                    }
+                    if (badminton) {
+                        selectedGames.push($('#game3').val())
+                    }
+                    if (carrom) {
+                        selectedGames.push($('#game4').val())
+                    }
+                    if (chess) {
+                        selectedGames.push($('#game5').val())
+                    }
+                    if (vollyball) {
+                        selectedGames.push($('#game6').val())
+                    }
+                }
+
+                isCheckedGame(isCricketCheck, isFootballCheck, isBadmintonCheck, isCarromCheck, isChessCheck, isVollyballCheck);
+
+                $('tbody').append('<tr> <td>' + userFirstName + '</td><td>' + userLastName + '</td><td>' + userDob + '</td><td>' + $.each(selectedGames, function (index, values) { values }) + '</td> <td><button class="delete">&#10007;</button></td></tr>');
+
+                $('tbody').on('click', '.delete', function () {
+                    $(this).parent().parent().remove()
+                });
+
+                //Valid name
+                function isValidName(name) {
+                    const regex = /^[A-Za-z]+$/;
+                    const checkValid = regex.test(name);
+                    return checkValid;
+                }
+
+                //empty input values
+                $('#firstname').val('');
+                $('#lastname').val('');
+                $('#birthdate').val('');
+                $('.fieldsinput').prop("checked", false);
+
+            })
+        })
+
+    </script>
+</body>
+
+</html>

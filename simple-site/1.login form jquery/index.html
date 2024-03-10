@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form validation</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div class="login">
+        <div class="left-div">
+            <div class="left-content">
+                <h1>Welcome</h1>
+                <form action="" target="_blank" id="login_form" name="login_form" method="post">
+                    <input type="email" name="username" id="username" placeholder="Enter email" title="invalid emailId">
+                    <input type="password" name="password" id="password" placeholder="Password" maxlength='10'>
+                    <input type="submit" value="NEXT">
+                </form>
+                <span class="error"></span>
+                <div class="left-sec-content">
+                    <p><b>Login</b> with Others</p>
+                    <button><img src="./image/google-icon.png" alt="">login with <b>Google</b></button>
+                    <button><img src="./image/facebook -icon.png" alt="">login with <b>Facebook</b></button>
+                </div>
+
+            </div>
+        </div>
+        <div class="right-div">
+            <img src="./image/Form-image.png" alt="">
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#login_form').submit(function (e) {
+                let userEmail = $('input[type="email"]').val();
+                let userPassword = $('input[type="password"]').val();
+
+                // Validate if email is not empty and is in a valid format
+                if (userEmail === '') {
+                    alert('bhai email id to daal ke jaa');
+                    e.preventDefault();
+                    return
+
+                } else if (!isValidEmail(userEmail)) {
+                    alert('bhai tumne email id me kuchh mistek kiyela hai');
+                    e.preventDefault();
+                    return
+
+                }
+
+
+                //user password emty
+                if (userPassword === '') {
+                    alert('bhai password ke bina kaise chalega');
+                    e.preventDefault();
+                    return
+
+                }
+
+                //use email or password match na hoy tyare
+                if (userEmail !== 'p@gmail.com' || userPassword !== 'p@12') {
+                    alert('idhar sirf tumara emailid, password dalne ka dusre ka nahi');
+                    e.preventDefault();
+
+                } else {
+                    window.location.href = 'redirect.html'
+                }
+            });
+
+
+            // Function to validate email format
+            function isValidEmail(email) {
+                let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            }
+
+        });
+
+
+    </script>
+</body>
+
+</html>

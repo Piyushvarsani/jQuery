@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback Function Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Callback function for text()
+            function customTextCallback(index, oldText) {
+                return "New Text: " + oldText.toUpperCase();
+            }
+
+            // Updating text using text() with callback
+            $("#myElement").text(customTextCallback);
+        });
+    </script>
+</head>
+
+<body>
+    <div id="myElement">Hello, World!</div>
+</body>
+
+</html>

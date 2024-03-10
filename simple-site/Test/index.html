@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Product id</th>
+                <th>Product catagory</th>
+                <th>Product Image</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Product Description</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script type="text/javascript">
+
+        let arr = $.makeArray(['ram', 'Din', 'dhan', 'mayu'])
+        var myArray = ['karina', 'salukaka', 'kinjaldidi', 'sarubapa', 'saktiman'];
+        var index = $.inArray('kinjaldidi', myArray);
+
+
+        console.log(myArray);
+
+
+        let name = 'hello everyone my name is Piyush';
+        name = name.replaceAll('piyush', 'chako');
+
+
+        console.log(name);
+
+        $.getJSON('https://fakestoreapi.com/products', function (data) {
+            $.each(data, function (index, val) {
+                $('tbody').append("<tr> <td>" + val.id + "</td> <td>" + val.category + "</td><td><img src=" + val.image + " width=" + 100 + "px></td> <td>" + val.title + "</td> <td>$" + val.price + "</td> <td>" + val.description + "</td>    </tr>");
+
+            })
+        })
+    </script>
+</body>
+
+</html>

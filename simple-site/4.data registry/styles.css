@@ -1,0 +1,66 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+
+
+label,
+input {
+    display: block;
+    width: 40%;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+input {
+    margin-bottom: 20px;
+    height: 40px;
+    border-radius: 12px;
+    font-size: 16px;
+    padding-left: 10px;
+    box-shadow: 0 2px rgba(0, 0, 0, 0.109);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="submit"] {
+    font-weight: 600;
+    padding: 15px 0;
+    background-color: #98a9ff;
+    color: #fff;
+}
+
+div {
+    margin-left: 30px;
+    margin-bottom: 80px;
+}
+
+
+th,
+td {
+    width: 320px;
+    text-align: center;
+    border: none;
+}
+
+th {
+    font-size: 20px;
+}
+
+tr {
+    height: 40px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgba(128, 128, 128, 0.091);
+    box-shadow: 0 3px rgba(0, 0, 0, 0.109);
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="main"> <!--main outer div -->
+        <div class="headers">
+            <h2><a href="signin.html">Sign in</a></h2>
+            <h2 class="header-2"><a href="">Sign up</a></h2>
+        </div>
+
+        <div class="main-form">
+            <div class="left-form">
+                <div class="left-inner-div">
+
+                    <form action="" method="post" id="sign_up" name="sign_up">
+                        <label for="firstname">First name</label>
+                        <input type="text" id="firstname" name="firstname">
+
+                        <label for="lastname">Last name</label>
+                        <input type="text" id="lastname" name="lastname">
+
+                        <label for="number">Phone number</label>
+                        <div class="phone">
+                            <select name="contrycode" id="countrycode">
+                                <option value="usa">+1</option>
+                                <option value="sychells">+248</option>
+                                <option value="india" selected>+91</option>
+                                <option value="pakinstan">+92</option>
+                            </select>
+                            <input type="tel" id="number" name="number">
+                        </div>
+
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+
+                        <label for="password">Create password</label>
+                        <input type="password" id="password" name="password">
+
+                        <input type="submit" value="Sign Up">
+                    </form>
+
+                    <span class="errspan"></span>
+                    <p class="warning">note: each field required with ( * )</p>
+
+                </div>
+            </div>
+
+            <div class="right-form">
+                <div>
+                    <p>or Sign Up via</p>
+                    <button><img src="image/facebook.png" alt="">Facebook</button>
+                    <button><img src="image/google.png" alt="">Google</button>
+                    <p>by clicking submit you agree to the <a href="terms and condition.html">terms and conditions</a>
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+
+            $('#sign_up').submit(function (e) {
+
+                //get user input values
+                let userFirstName = $('#firstname').val();
+                let userLastName = $('#lastname').val();
+                let userNumber = $('#number').val();
+                let userEmail = $('#email').val();
+                let userPassword = $('#password').val();
+
+                //select error span
+                let errorspan = $('span')
+
+
+
+                //firstname validation
+                if (userFirstName === '') {
+                    errorspan.text('fill field');
+                    e.preventDefault();
+                    return;
+                } else if (!textValid(userFirstName)) {
+                    errorspan.text('invalid First Name');
+                    e.preventDefault();
+                    return
+                }
+
+                //lastname empty and validation
+                if (userLastName === '') {
+                    errorspan.text('fill last name');
+                    e.preventDefault();
+                    return;
+                } else if (!textValid(userLastName)) {
+                    errorspan.text('invalid last Name');
+                    e.preventDefault();
+                    return
+
+                }
+
+                //phone number empty and validation
+                if (userNumber === '') {
+                    errorspan.text('fill number');
+                    e.preventDefault();
+
+                    return;
+                } else if (!userNumberValid(userNumber)) {
+                    errorspan.text('fill correct number');
+                    e.preventDefault();
+                    return
+
+                }
+
+                //email empty and validation
+                if (userEmail === '') {
+                    errorspan.text('fill email field');
+                    e.preventDefault();
+
+                    return;
+                } else if (!isValidEmail(userEmail)) {
+                    errorspan.text('fill correct emailid');
+                    e.preventDefault();
+                    return
+                }
+
+                //password empty and validation
+                if (userPassword === '') {
+                    errorspan.text('fill enter password');
+                    e.preventDefault();
+                    return
+                } else if (!isValidPassword(userPassword)) {
+                    errorspan.text('password must Atlist one Alphabet Charector,Atlist one small case Charector,Atlist one number,Atlist one special Charector,minimum 8 charector');
+                    e.preventDefault();
+                }
+
+            });
+
+
+
+
+            function textValid(text) {
+                let regex = /^[a-zA-Z]+$/gi;
+                return regex.test(text)
+            }
+
+            function userNumberValid(number) {
+                let regex = /^[0-9]{7,12}$/gi;
+                return regex.test(number)
+            }
+            function isValidEmail(email) {
+                let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            }
+            function isValidPassword(password) {
+                let regex = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-z])(?=.*\d)(?=.*[A-Z]).{8,}$/gm;
+                return regex.test(password);
+            }
+
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>

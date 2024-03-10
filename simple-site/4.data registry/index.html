@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data registry</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <form>
+        <h1>Data Registry</h1>
+        <div>
+            <label for="id">ID</label>
+            <input type="number" id="id" name="id" required>
+
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="salary">Salary</label>
+            <input type="number" id="salary" name="salary" required>
+
+            <input type="submit" value="Add">
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee id</th>
+                    <th>Employee Name</th>
+                    <th>Employee Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </form>
+
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            $('input[type="text"],input[type="number"]').focus(function () {
+                $(this).css('background', 'rgb(217, 255, 252)')
+            })
+            $('input[type="text"],input[type="number"]').blur(function () {
+                $(this).css('background-color', 'white')
+            })
+
+            $('input[type="submit"]').click(function (e) {
+                e.preventDefault();
+                let empId = $('#id').val();
+                let empName = $('#name').val();
+                let empSalary = $('#salary').val();
+
+                //Employee id empty and limit check
+                if (empId === '') {
+                    alert('please enter employee id ');
+                    return
+                } else if (!isValidEmpId(empId)) {
+                    alert('Enter Employee Id between 1 to 30')
+                    return
+                }
+
+                //Employee name empty and inValid check
+                if (empName === '') {
+                    alert('enter Employee name');
+                    return
+                } else if (!isValidEmpName(empName)) {
+                    alert('Enter valid Name')
+                    return
+                }
+
+
+                //Employee salary empty check
+                if (empSalary === '') {
+                    alert('enter employee salary')
+                    return
+                } else if (!isValidEmpSalary(empSalary)) {
+                    alert('Enter employee salary between 2000-30000')
+                    return
+                }
+
+                $('table').on('click', '.delete', function () {
+                    $(this).parent().parent().remove();
+                });
+                $('tbody').append('<tr> <td>' + empId + '</td> <td>' + empName + ' </td><td>' + empSalary + '</td> <td><button class="delete">Remove</button></td></tr>');
+
+
+                //valid function for Employee id
+                function isValidEmpId(id) {
+                    const regex = /^(?:[1-9]|1\d|2[0-9]|30)$/;;;
+                    const checkValid = regex.test(id);
+                    return checkValid;
+                }
+                //valid function for Employee name
+                function isValidEmpName(name) {
+                    const regex = /^[A-Za-z]+$/;
+                    const checkValid = regex.test(name);
+                    return checkValid;
+                }
+                //valid function for Employee Salary
+                function isValidEmpSalary(salary) {
+                    const regex = /^(?:2000|[2-9]\d{3}|[12]\d{4}|30000)$/;
+                    const checkValid = regex.test(salary);
+                    return checkValid;
+                }
+
+                $('input[type="text"],input[type="number"]').val("")
+
+
+                e.preventDefault()
+
+            });
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>
